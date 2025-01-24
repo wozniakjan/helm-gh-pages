@@ -104,6 +104,11 @@ main() {
 }
 
 locate() {
+  if [[ ! -z "$OPTIONAL_SINGLE_CHART_PATH" ]]; then
+    CHARTS=("${OPTIONAL_SINGLE_CHART_PATH}")
+    echo "Found chart directory ${OPTIONAL_SINGLE_CHART_PATH}"
+    return
+  fi
   for dir in $(find "${CHARTS_DIR}" -type d -mindepth 1 -maxdepth 1); do
     if [[ -f "${dir}/Chart.yaml" ]]; then
       CHARTS+=("${dir}")
