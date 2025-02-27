@@ -11,6 +11,9 @@ inputs:
   charts_dir:
     description: "The charts directory, defaults to `charts`"
     required: false
+  single_chart_path:
+    description: "Single chart directory if there is no desire to go over multiple charts"
+    required: false
   charts_url:
     description: "The GitHub Pages URL, defaults to `https://<OWNER>.github.io/<REPOSITORY>`"
     required: false
@@ -58,6 +61,8 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  env:
+    OPTIONAL_SINGLE_CHART_PATH: ${{ inputs.single_chart_path }}
   args:
     - ${{ inputs.token }}
     - ${{ inputs.charts_dir }}
